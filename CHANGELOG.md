@@ -4,6 +4,10 @@ All notable changes are listed here. The format follows [Keep a Changelog](https
 
 ## [Unreleased]
 
+### Fixed
+
+- `POST /admin/v1/keys` refuses an `expires_at` that is not after now with 400 `invalid`, instead of minting a key that fails at first use. `PATCH` still accepts a past time to retire a key at once.
+
 ## [0.3.0] - 2026-11-21
 
 ### Added

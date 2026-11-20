@@ -115,6 +115,10 @@ func (h *handler) createKey(w http.ResponseWriter, r *http.Request) {
 		h.fail(w, r, "key", err)
 		return
 	}
+	if now := h.d.Now(); !expires.IsZero() && !expires.After(now) {
+		h.fail(w, r, "key", invalid("expires_at", "expires_at is in the past; a key that has expired cannot be used"))
+		return
+	}
 	teams, err := readTeams(body.Teams)
 	if err != nil {
 		h.fail(w, r, "key", err)
