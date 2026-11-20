@@ -90,6 +90,7 @@ func TestCreateKeyInvalid(t *testing.T) {
 		{"expiry not a string", map[string]any{"name": "a", "expires_at": 5}, "invalid", "expires_at"},
 		{"past expiry", map[string]any{"name": "a", "expires_at": "2026-11-20T11:00:00Z"}, "invalid", "expires_at"},
 		{"expiry at now", map[string]any{"name": "a", "expires_at": "2026-11-20T12:00:00Z"}, "invalid", "expires_at"},
+		{"zero expiry", map[string]any{"name": "a", "expires_at": "0001-01-01T00:00:00Z"}, "invalid", "expires_at"},
 		{"empty team", map[string]any{"name": "a", "teams": []string{""}}, "invalid", "teams"},
 		{"unknown field", map[string]any{"name": "a", "owner": "me"}, "invalid", "owner"},
 		{"wrong type", map[string]any{"name": 5}, "invalid", "name"},

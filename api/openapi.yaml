@@ -883,7 +883,7 @@ components:
         expires_at:
           type: [string, "null"]
           format: date-time
-          description: A time after now is required; a key that would be born expired is refused.
+          description: When set, it must be after now; a key that would be born expired is refused.
 
     KeyPatch:
       type: object
