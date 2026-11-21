@@ -7,6 +7,7 @@ Thanks for helping out. Bug reports, docs fixes, tests and new features are all 
 - Issues labeled `good first issue` are small and say exactly what to change.
 - Issues labeled `help wanted` are bigger. Each one describes the proposed API, the behavior and the tests it needs.
 - The milestones group issues by release. Start with the earliest one.
+- The [mothership board](https://github.com/users/raven-clown/projects/3/views/1?filterQuery=is%3Aissue+is%3Aopen+no%3Aassignee+label%3A%22good+first+issue%22%2C%22help+wanted%22) lists every open `good first issue` and `help wanted` issue across airlock, rosetta, transponder and logbook that nobody has taken yet.
 
 If you take an issue, leave a comment on it so nobody else picks it up. If you go quiet for two weeks, someone else may take it over.
 
@@ -45,7 +46,7 @@ Every change comes with tests. A pull request without them is only merged when t
 - Prefer table-driven tests with `t.Run` subtests and clear names.
 - Test behavior through the public API. Don't test private helpers unless they hold real logic.
 - Tests must pass with `-race` and must not depend on timing. Use channels or polling with a deadline, never a bare `time.Sleep`.
-- No network calls in unit tests. Use `httptest` servers or the fakes in `internal/testutil`.
+- No network calls in unit tests. Use `httptest` servers, the local OIDC provider in `internal/auth/authtest`, and the shared suites in `internal/store/storetest` and `internal/limits/limitstest`.
 - Tests that need Postgres skip unless `TRANSPONDER_TEST_POSTGRES` holds the URL of a server, so `go test ./...` passes without one. CI runs them. Other tests that need Docker or a real service go behind the `integration` build tag.
 - A store method is tested in `internal/store/storetest`, the suite that runs against both SQLite and Postgres.
 - CI fails if total coverage drops below 80%.
